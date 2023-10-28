@@ -11,7 +11,8 @@ from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    username_validator = ASCIIUsernameValidator()
+    # Unicodeを用いるとアカウントなりすましの危険性が上がるため名前にはASCIIコードのみ使用できるようにしている.
+    username_validator = ASCIIUsernameValidator() 
     username = models.CharField(
         _('username'),
         max_length=150,
